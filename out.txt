@@ -1,0 +1,110 @@
+[ {
+  "command" : "getPlayerDeck",
+  "playerIdx" : 2,
+  "output" : {
+    "cards" : [ {
+      "mana" : 1,
+      "name" : "Sentinel",
+      "description" : "Standard card: Trained by the best, nothing will catch him off-guard.",
+      "colors" : [ "Black", "Grey", "Blue" ],
+      "type" : "Minion",
+      "playerID" : 2
+    }, {
+      "mana" : 5,
+      "name" : "Miraj",
+      "description" : "Premium card: Insanity is always an option, now it is an absolute.",
+      "colors" : [ "Yellow", "Orange", "Red" ],
+      "type" : "Minion",
+      "playerID" : 2
+    }, {
+      "mana" : 2,
+      "name" : "The Cursed One",
+      "description" : "Premium card: Nobody suspects an outcast, not even the Gods.",
+      "colors" : [ "Black", "White", "Red" ],
+      "type" : "Minion",
+      "playerID" : 2
+    }, {
+      "mana" : 2,
+      "name" : "Winterfell",
+      "description" : "Premium card: All is white. My mouth is frozen and I must scream.",
+      "colors" : [ "White", "Blue" ],
+      "type" : "Environment",
+      "playerID" : 2
+    }, {
+      "mana" : 3,
+      "name" : "Warden",
+      "description" : "Premium card: You shall not pass, you shall not prevail, you shall perish.",
+      "colors" : [ "Brown", "Blue" ],
+      "type" : "Minion",
+      "playerID" : 2
+    } ]
+  }
+}, {
+  "command" : "getPlayerDeck",
+  "playerIdx" : 1,
+  "output" : {
+    "cards" : [ {
+      "mana" : 2,
+      "name" : "Disciple",
+      "description" : "Premium card: The will of Gods has been spoken, obey and you shall be saved...or not.",
+      "colors" : [ "Yellow", "White" ],
+      "type" : "Minion",
+      "playerID" : 1
+    }, {
+      "mana" : 3,
+      "name" : "Disciple",
+      "description" : "Standard card: Everything is sacred to him, all is but a gift from the saints.",
+      "colors" : [ "Yellow", "White" ],
+      "type" : "Minion",
+      "playerID" : 1
+    }, {
+      "mana" : 1,
+      "name" : "Winterfell",
+      "description" : "Standard card: The days are cold and so are we. We hope we can close our eyes again.",
+      "colors" : [ "White", "Grey", "Black" ],
+      "type" : "Environment",
+      "playerID" : 1
+    }, {
+      "mana" : 2,
+      "name" : "Sentinel",
+      "description" : "Standard card: Trained by the best, nothing will catch him off-guard.",
+      "colors" : [ "Black", "White" ],
+      "type" : "Minion",
+      "playerID" : 1
+    }, {
+      "mana" : 4,
+      "name" : "Goliath",
+      "description" : "Premium card: No matter how many, his body will fight. Save your breath for the Mountain is strong.",
+      "colors" : [ "Red", "Purple" ],
+      "type" : "Minion",
+      "playerID" : 1
+    } ]
+  }
+}, {
+  "command" : "getPlayerHero",
+  "playerIdx" : 1,
+  "output" : {
+    "mana" : 2,
+    "name" : "General Kocioraw",
+    "description" : "Premium card: An army is not sufficient, he is ready obliterate, it is time for chaos.",
+    "colors" : [ "Red", "Black", "Purple" ],
+    "type" : "Hero",
+    "playerID" : 1,
+    "health" : 30
+  }
+}, {
+  "command" : "getPlayerHero",
+  "playerIdx" : 2,
+  "output" : {
+    "mana" : 2,
+    "name" : "King Mudface",
+    "description" : "Premium card: Time to show who we are, the low-class was never scared of you.",
+    "colors" : [ "Brown", "Pink", "Purple" ],
+    "type" : "Hero",
+    "playerID" : 2,
+    "health" : 30
+  }
+}, {
+  "command" : "getPLayerTurn",
+  "output" : 2
+} ]
