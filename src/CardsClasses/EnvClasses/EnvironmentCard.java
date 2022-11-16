@@ -1,16 +1,25 @@
-package CardsClasses.EnvClasses;
+package cardsclasses.envclasses;
 
-import CardsClasses.Card;
+import cardsclasses.Card;
+import gameclasses.Game;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.util.ArrayList;
 
 @JsonTypeName("Environment")
 public abstract class EnvironmentCard extends Card {
-    public EnvironmentCard(int mana, String name, String description, ArrayList<String> colors, int playerID) {
+    public EnvironmentCard(final int mana, final String name, final String description,
+                           final ArrayList<String> colors, final int playerID) {
         super(mana, name, description, colors, "Environment", playerID);
     }
 
-    abstract void ability(int TargetRow);
+    /**
+     * @param targetRow index of the row from the table we want to use the card's ability on
+     * @param game variable for the game we're playing
+     * @return an int code to know what error we have
+     * -1 : wrong row targeted
+     * 0 : the ability was used properly
+     */
+    public abstract int ability(int targetRow, Game game);
 
 }

@@ -1,14 +1,12 @@
 package main;
 
-import GameClasses.Game;
+import gameclasses.Game;
 import checker.Checker;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
-import fileio.CardInput;
 import fileio.Input;
 
 import java.io.File;

@@ -1,10 +1,6 @@
-package CardsClasses;
+package cardsclasses;
 
-import CardsClasses.MinionClasses.*;
-import CardsClasses.HeroClasses.*;
-import CardsClasses.EnvClasses.*;
-import GameClasses.*;
-import checker.CheckerConstants;
+import gameclasses.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -12,9 +8,6 @@ import fileio.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Collections;
 
 public class MainTestingCards {
     public static void main(String[] args) throws IOException {
@@ -86,7 +79,7 @@ public class MainTestingCards {
 //        input.setNrDecks(2);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Input inputData = objectMapper.readValue(new File("input/test01_game_start.json"),
+        Input inputData = objectMapper.readValue(new File("input/test10_attack_hero.json"),
                 Input.class);
 
         Player player = new Player(1);

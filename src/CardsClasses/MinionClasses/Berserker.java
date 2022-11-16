@@ -1,14 +1,18 @@
-package CardsClasses.MinionClasses;
+package cardsclasses.minionclasses;
 
 import java.util.ArrayList;
 
 public class Berserker extends MinionCard {
-    public Berserker(int mana, int ad, int hp, String description, ArrayList<String> colors, String name, int playerID) {
+    public Berserker(final int mana, final int ad, final int hp, final String description,
+                     final ArrayList<String> colors, final String name, final int playerID) {
         super(mana, ad, hp, description, colors, name, playerID);
         setTank(false);
-        if(playerID == 1){
+        if (playerID == 1) {
             setRow(3);
-        } else
+            setMirroredRow(0);
+        } else {
             setRow(0);
+            setMirroredRow(3);
+        }
     }
 }

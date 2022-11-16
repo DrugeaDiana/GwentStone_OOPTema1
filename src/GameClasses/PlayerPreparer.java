@@ -1,8 +1,6 @@
-package GameClasses;
-import CardsClasses.MinionClasses.*;
-import CardsClasses.EnvClasses.*;
-import CardsClasses.HeroClasses.*;
-import CardsClasses.*;
+package gameclasses;
+import cardsclasses.heroclasses.*;
+import cardsclasses.*;
 import fileio.*;
 
 import java.util.ArrayList;
@@ -42,22 +40,26 @@ public class PlayerPreparer {
             int deck_index = start.getPlayerOneDeckIdx();
             System.out.println(deck_index);
             player.setCurrentDeck(player.getDecks().get(deck_index));
-            player.setShuffledDeck(player.getDecks().get(deck_index));
+            //player.setShuffledDeck(player.getDecks().get(deck_index));
             Collections.shuffle(player.getCurrentDeck().getCards(), rnd);
             CardCreator creator = new CardCreator();
             HeroCard playerHero = creator.createHero(start.getPlayerOneHero(), playerIdx);
             player.setHero(playerHero);
+            player.getHand().add(player.getCurrentDeck().getCards().get(0));
             player.getCurrentDeck().getCards().remove(0);
+            player.setFinishTurn(false);
         } else {
             int deck_index = start.getPlayerTwoDeckIdx();
             System.out.println(deck_index);
             player.setCurrentDeck(player.getDecks().get(deck_index));
-            player.setShuffledDeck(player.getDecks().get(deck_index));
+            //player.setShuffledDeck(player.getDecks().get(deck_index));
             Collections.shuffle(player.getCurrentDeck().getCards(), rnd);
             CardCreator creator = new CardCreator();
             HeroCard playerHero = creator.createHero(start.getPlayerTwoHero(), playerIdx);
             player.setHero(playerHero);
+            player.getHand().add(player.getCurrentDeck().getCards().get(0));
             player.getCurrentDeck().getCards().remove(0);
+            player.setFinishTurn(false);
             //player.getHand().add(player.getShuffledDeck().getCards().get(0));
             //player.getCurrentDeck().getCards().remove(player.getHand().get(0));
         }

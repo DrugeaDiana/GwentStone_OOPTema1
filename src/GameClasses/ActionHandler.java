@@ -1,39 +1,67 @@
-package GameClasses;
+package gameclasses;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import fileio.ActionsInput;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ActionHandler {
 
-    public void checkAction (ActionsInput action, ArrayNode output, Player player, int turnCounter, int startingPlayer) throws IOException {
+    public void checkAction (final ActionsInput action, final ArrayNode output,
+                             final Player player, final Game game) throws IOException {
         int playerIndex = player.getPlayerId();
         Debug debugCommands = new Debug();
-       // System.out.println(action.getCommand());
-       // System.out.println("testing the rest of shit");
+        GameCommands gameCommands = new GameCommands();
         String command = action.getCommand();
         switch (command) {
             case "getPlayerDeck" -> {
-                //System.out.println("o comanda");
                 debugCommands.getPlayerDeck(playerIndex, player, output);
             }
             case "getPlayerHero" -> {
-                //System.out.println("a doua comanda");
-                debugCommands.getHero(playerIndex, player, output);
+                debugCommands.getPlayerHero(playerIndex, player, output);
             }
             case "getPlayerTurn" -> {
-                //System.out.println("a treia comanda");
-                debugCommands.getPlayerTurn(turnCounter, startingPlayer, output);
+                debugCommands.getPlayerTurn(game.getTurnCounter(), game.getStartingPlayer(),
+                                            output);
             }
-            //default -> {
-                //System.out.println("something happened");
-            //}
+            case "endPlayerTurn" -> {
+                gameCommands.endPlayerTurn(game, player);
+            }
+            case "placeCard" -> {
+                gameCommands.placeCard(game, player, action.getHandIdx(), output);
+            }
+            case "getPlayerMana" -> {
+                debugCommands.getPlayerMana(player, output);
+            }
+            case "getCardsInHand" -> {
+                debugCommands.getPlayerHand(player, output);
+            }
+            case "getCardsOnTable" -> {
+                debugCommands.getCardsOnTable(game, output);
+            }
+            case "useEnvironmentCard" -> {
+                gameCommands.useEnvironmentCard(game, player, action.getHandIdx(),
+                        action.getAffectedRow(), output);
+            }
+            case "getEnvironmentCardsInHand" -> {
+                debugCommands.getEnvironmentCardsInHand(player, output);
+            }
+            case "getCardAtPosition" -> {
+                debugCommands.getCardAtPosition(game, output, action);
+            }
+            case "getFrozenCardsOnTable" -> {
+                debugCommands.getFrozenCardsOnTable(game, output);
+            }
+            case "cardUsesAttack" -> {
+                gameCommands.cardAttack(game, action, output);
+            }
+            case "cardUsesAbility" -> {
+                gameCommands.cardUsesAbility(game, action, output);
+            }
+            case "useAttackHero" -> {
+                gameCommands.useAttackHero(game, action, player, output);
+            }
+            default -> {}
         }
-
-
-
     }
-
 }

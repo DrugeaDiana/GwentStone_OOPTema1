@@ -1,31 +1,30 @@
-package CardsClasses;
+package cardsclasses;
 
 import java.util.ArrayList;
 
-public class Deck {
+public final class Deck {
+    private ArrayList<Card> cards;
+
+    /**
+     * @return the list of cards from this Deck
+     */
     public ArrayList<Card> getCards() {
         return cards;
     }
 
-    public void setCards(ArrayList<Card> cards) {
+    public void setCards(final ArrayList<Card> cards) {
         this.cards = cards;
     }
 
-    private ArrayList<Card> cards;
-
-    public Deck(ArrayList<Card> cards) {
+    public Deck(final ArrayList<Card> cards) {
         this.cards = cards;
     }
 
-    public Deck(Deck copy_deck){
+    /**
+     * @param copyDeck the Deck to be copied into the new deck
+     */
+    public Deck(final Deck copyDeck) {
         this.cards = new ArrayList<>();
-        this.cards.addAll(copy_deck.cards);
-    }
-
-    @Override
-    public String toString() {
-        return "Deck\n{" +
-                "cards=" + cards +
-                '}';
+        this.cards.addAll(copyDeck.cards);
     }
 }

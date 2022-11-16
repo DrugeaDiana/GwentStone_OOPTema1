@@ -1,12 +1,19 @@
-package GameClasses;
-import CardsClasses.*;
-import CardsClasses.HeroClasses.HeroCard;
-import fileio.*;
-
+package gameclasses;
+import cardsclasses.*;
+import cardsclasses.heroclasses.HeroCard;
 
 import java.util.ArrayList;
 
 public class Player {
+    public boolean isFinishTurn() {
+        return finishTurn;
+    }
+
+    public void setFinishTurn(boolean finishTurn) {
+        this.finishTurn = finishTurn;
+    }
+
+    boolean finishTurn;
     public int getPlayerId() {
         return playerId;
     }
@@ -66,6 +73,15 @@ public class Player {
     }
 
     private HeroCard hero;
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
     private int mana;
     private int games;
     private int nrDecks;
@@ -77,7 +93,9 @@ public class Player {
 
     public Player(int playerId){
         this.playerId = playerId;
+        this.mana = 1;
     };
+
 
     @Override
     public String toString() {
