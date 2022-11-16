@@ -79,19 +79,19 @@ public class MainTestingCards {
 //        input.setNrDecks(2);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Input inputData = objectMapper.readValue(new File("input/test10_attack_hero.json"),
+        Input inputData = objectMapper.readValue(new File("input/test18_big_game.json"),
                 Input.class);
 
-        Player player = new Player(1);
-        PlayerPreparer preparer = new PlayerPreparer();
-
-        player.setDecks(preparer.prepareDecks(inputData.getPlayerOneDecks(), player));
-        System.out.println(player);
-        preparer.preparePlayer(player, inputData.getGames().get(0).getStartGame());
-
-        System.out.println(player.getHero());
-
-        Debug testing = new Debug();
+//        Player player = new Player(1);
+//        PlayerPreparer preparer = new PlayerPreparer();
+//
+//        player.setDecks(preparer.prepareDecks(inputData.getPlayerOneDecks(), player));
+//        System.out.println(player);
+//        preparer.preparePlayer(player, inputData.getGames().get(0).getStartGame());
+//
+//        System.out.println(player.getHero());
+//
+//        Debug testing = new Debug();
 
 
         ArrayNode output = objectMapper.createArrayNode();
@@ -101,7 +101,11 @@ public class MainTestingCards {
 //        testing.getHero(1, player, output);
 //
         Game game = new Game(inputData, output);
-        game.playGame(0);
+        for (int i = 0; i < inputData.getGames().size(); i++) {
+            System.out.println("joc nou");
+            game.playGame(i);
+        }
+
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File("testing.json"), output);

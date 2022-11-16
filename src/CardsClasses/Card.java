@@ -91,5 +91,13 @@ public abstract class Card {
         this.playerID = playerID;
     }
 
-
+    @Override
+    public String toString() {
+        return "Card{" +
+                "mana=" + mana +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", colors=" + colors +
+                "}\n";
+    }
 }

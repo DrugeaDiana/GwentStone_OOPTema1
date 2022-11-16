@@ -18,6 +18,7 @@ public abstract class EnvironmentCard extends Card {
      * @param game variable for the game we're playing
      * @return an int code to know what error we have
      * -1 : wrong row targeted
+     * -2 (for HeartHound) : player's row is full
      * 0 : the ability was used properly
      */
     public abstract int ability(int targetRow, Game game);

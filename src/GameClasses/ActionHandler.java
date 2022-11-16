@@ -61,6 +61,18 @@ public class ActionHandler {
             case "useAttackHero" -> {
                 gameCommands.useAttackHero(game, action, player, output);
             }
+            case "useHeroAbility" -> {
+                gameCommands.useHeroAbility(game, player, action.getAffectedRow(), output);
+            }
+            case "getPlayerOneWins" -> {
+                debugCommands.getPlayerOneWins(game, output);
+            }
+            case "getPlayerTwoWins" -> {
+                debugCommands.getPlayerTwoWins(game, output);
+            }
+            case "getTotalGamesPlayed" -> {
+                debugCommands.getTotalGamesPlayed(game, output);
+            }
             default -> {}
         }
     }

@@ -113,4 +113,25 @@ public class Debug {
         output.add(node);
     }
 
+    public void getPlayerOneWins(final Game game, ArrayNode output) {
+        ObjectNode node = mapper.createObjectNode();
+        node.put("command", "getPlayerOneWins");
+        node.put("output", game.getPlayer1().getWins());
+        output.add(node);
+    }
+
+    public void getPlayerTwoWins(final Game game, ArrayNode output) {
+        ObjectNode node = mapper.createObjectNode();
+        node.put("command", "getPlayerTwoWins");
+        node.put("output", game.getPlayer2().getWins());
+        output.add(node);
+    }
+
+    public void getTotalGamesPlayed(final Game game, ArrayNode output) {
+        ObjectNode node = mapper.createObjectNode();
+        node.put("command", "getTotalGamesPlayed");
+        node.put("output", game.getGameNumbers());
+        output.add(node);
+    }
+
 }

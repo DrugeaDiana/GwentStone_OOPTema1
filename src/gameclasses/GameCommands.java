@@ -51,6 +51,8 @@ public class GameCommands {
                 output.add(node);
             }
         } else {
+            System.out.println(player.getCurrentDeck().getCards());
+            System.out.println(player.getHand());
             System.out.println("n-ai minion");
             node.put("command", "placeCard");
             node.put("handIdx", handIdx);
@@ -261,11 +263,45 @@ public class GameCommands {
                     } else {
                         node2.put("gameEnded", "Player one killed the enemy hero.");
                     }
+                    player.setWins(player.getWins() + 1);
+                    game.setGameNumbers(game.getGameNumbers() + 1);
                     output.add(node2);
                 }
             }
             default -> {}
         }
 
+    }
+
+    public void useHeroAbility(Game game, Player player, int targetRow, ArrayNode output) {
+        ObjectNode node = mapper.createObjectNode();
+        node.put("command", "useHeroAbility");
+       // node.put("handIdx", handIdx);
+        node.put("affectedRow", targetRow);
+        HeroCard playerHero = player.getHero();
+        if(player.getMana() >= playerHero.getMana()) {
+            int answer = playerHero.ability(targetRow, game);
+            switch (answer) {
+                case -1 -> {
+                    node.put("error", "Selected row does not belong to the enemy.");
+                    output.add(node);
+                }
+                case -2 -> {
+                    node.put("error", "Selected row does not belong to the current player.");
+                    output.add(node);
+                }
+                case -3 -> {
+                    node.put("error", "Hero has already attacked this turn.");
+                    output.add(node);
+                }
+                case 0 -> {
+                    player.setMana(player.getMana() - playerHero.getMana());
+                }
+            }
+
+        } else {
+            node.put("error", "Not enough mana to use hero's ability.");
+            output.add(node);
+        }
     }
 }

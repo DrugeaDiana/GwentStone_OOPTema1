@@ -220,6 +220,15 @@ public class MinionCard extends Card {
         this.frozen = frozen;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "MinionCard{" +
+                " mana " + getMana() +
+                " name " + getName() +
+                " description " + getDescription() +
+                " colors " + getColors() +
+                " health= " + health +
+                ", attackDamage= " + attackDamage +
+                "}\n";
+    }
 }

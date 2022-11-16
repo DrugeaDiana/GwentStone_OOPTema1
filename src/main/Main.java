@@ -75,7 +75,10 @@ public final class Main {
         //TODO add here the entry point to your implementation
 
         Game game = new Game(inputData, output);
-        game.playGame(0);
+        for (int i = 0; i < inputData.getGames().size(); i++) {
+            System.out.println("joc nou");
+            game.playGame(i);
+        }
 
 
 

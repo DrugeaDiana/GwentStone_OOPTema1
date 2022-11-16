@@ -83,8 +83,7 @@ public class Player {
     }
 
     private int mana;
-    private int games;
-    private int nrDecks;
+    private int wins;
 
     public Player(int playerId, ArrayList<Deck> decks) {
         this.playerId = playerId;
@@ -102,5 +101,13 @@ public class Player {
         return "Player{" +
                 "decks=" + decks +
                 '}';
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(final int wins) {
+        this.wins = wins;
     }
 }

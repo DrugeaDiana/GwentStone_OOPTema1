@@ -27,4 +27,11 @@ public final class Deck {
         this.cards = new ArrayList<>();
         this.cards.addAll(copyDeck.cards);
     }
+
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "cards=" + cards +
+                '}';
+    }
 }

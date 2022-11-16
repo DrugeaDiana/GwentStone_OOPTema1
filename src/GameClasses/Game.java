@@ -29,7 +29,16 @@ public class Game {
     }
 
     private Player player2;
-    private int game_numbers;
+
+    public int getGameNumbers() {
+        return gameNumbers;
+    }
+
+    public void setGameNumbers(final int gameNumbers) {
+        this.gameNumbers = gameNumbers;
+    }
+
+    private int gameNumbers;
     private ArrayNode output;
     private Input inputData;
 
@@ -83,7 +92,7 @@ public class Game {
         player2 = new Player(2);
         PlayerPreparer prep = new PlayerPreparer();
         player1.setDecks(prep.prepareDecks(inputData.getPlayerOneDecks(), player1));
-        game_numbers = inputData.getGames().size();
+        gameNumbers = 0;
         player2.setDecks(prep.prepareDecks(inputData.getPlayerTwoDecks(), player2));
         players = new ArrayList<>();
         players.add(player1);
@@ -106,22 +115,26 @@ public class Game {
         tableInit();
         newturn = false;
         PlayerPreparer prep = new PlayerPreparer();
-        prep.preparePlayer(player1, inputData.getGames().get(game_index).getStartGame());
-        prep.preparePlayer(player2, inputData.getGames().get(game_index).getStartGame());
+        prep.preparePlayer(player1, inputData.getGames().get(game_index).getStartGame(),
+                inputData.getPlayerOneDecks());
+        prep.preparePlayer(player2, inputData.getGames().get(game_index).getStartGame(),
+                inputData.getPlayerTwoDecks());
         startingPlayer = inputData.getGames().get(game_index).getStartGame().getStartingPlayer();
         boolean ongoing = true;
         int counter = 0;
         turnCounter = 1;
         System.out.println(player1.getCurrentDeck());
+        System.out.println(player1.getHand());
+        System.out.println('\n');
         System.out.println(player2.getCurrentDeck());
+        System.out.println(player2.getHand());
         ActionHandler handler = new ActionHandler();
         ArrayList<ActionsInput> actions = inputData.getGames().get(game_index).getActions();
         //System.out.println(actions);
         int playerIdx = startingPlayer;
         int pastPlayer = startingPlayer;
         int roundCounter = 1;
-        while(ongoing && counter < inputData.getGames().get(game_index).getActions().size()){
-
+        while(counter < inputData.getGames().get(game_index).getActions().size()){
             if(newturn) {
                 if(player1.isFinishTurn() && player2.isFinishTurn()) {
                     if (player2.getCurrentDeck().getCards().size() > 0) {
@@ -149,10 +162,12 @@ public class Game {
                             minion.setAttackedTurn(false);
                         }
                     }
+                    player1.getHero().setAttackTurn(false);
+                    player2.getHero().setAttackTurn(false);
                 }
                 for (ArrayList<MinionCard> minionCards : table) {
                     for (MinionCard minion : minionCards) {
-                        if(turnCounter - minion.getFrozenTurn() == 2) {
+                        if (turnCounter - minion.getFrozenTurn() == 2) {
                             minion.setFrozen(false);
                         }
                     }
@@ -175,11 +190,20 @@ public class Game {
             } else {
                 handler.checkAction(actions.get(counter), output, this.getPlayer2(), this);
             }
-            if(players.get(0).getHero().getHealth() < 0) {
-                ongoing = false;
-            }
+            /*if (ongoing) {
+                if (player1.getHero().getHealth() < 0) {
+                    //player2.setWins(player2.getWins() + 1);
+                    ongoing = false;
+                    gameNumbers = gameNumbers + 1;
+                } else {
+                    if (player2.getHero().getHealth() < 0) {
+                        //player1.setWins(player1.getWins() + 1);
+                        ongoing = false;
+                        gameNumbers = gameNumbers + 1;
+                    }
+                }
+            }*/
             counter++;
-
         }
     }
 }

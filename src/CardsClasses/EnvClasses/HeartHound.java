@@ -16,6 +16,7 @@ public class HeartHound extends EnvironmentCard {
      * @param game variable for the game we're playing
      * this function implements the "steal minion" functionality of this card's ability
      * @return error code
+     * -2 : the player can't add the stolen card to their row
      */
     public int stealMinion(final int targetRow, final Game game) {
         ArrayList<MinionCard> rowMinions = game.getTable().get(targetRow);
@@ -45,7 +46,10 @@ public class HeartHound extends EnvironmentCard {
      * @param targetRow index of the row from the table we want to use the card's ability on
      * @param game      variable for the game we're playing
      * implements the specific ability of this card
-     * @return error code (here -1, -2, -4, 0)
+     * @return error code
+     * -1 : the targeted row is not from the enemy player
+     * -2 : the player can't add the stolen card to their row
+     *  0 : ability is cast with no problems
      */
     @Override
     public int ability(final int targetRow, final Game game) {
