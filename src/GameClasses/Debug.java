@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import constants.CommandStrings;
+import constants.ErrorStrings;
 import fileio.ActionsInput;
 import java.util.ArrayList;
 
@@ -134,7 +135,19 @@ public class Debug {
         node.put("command", CommandStrings.CARD_AT_POSITION);
         int x = action.getX();
         int y = action.getY();
-        node.set("output", mapper.convertValue(game.getTable().get(x).get(y), JsonNode.class));
+        node.put("x", x);
+        node.put("y", y);
+        if (game.getTable().size() > x) {
+            if (game.getTable().get(x).size() > y) {
+                node.set("output", mapper.convertValue(game.getTable().get(x).get(y),
+                        JsonNode.class));
+            } else {
+                node.put("output", ErrorStrings.NO_CARD);
+            }
+        } else {
+            node.put("output", ErrorStrings.NO_CARD);
+        }
+
         output.add(node);
     }
 

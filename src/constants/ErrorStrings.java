@@ -20,6 +20,7 @@ public final class ErrorStrings {
             + "current player.";
     public static final String DOUBLE_ACTION_HERO = "Hero has already attacked this turn.";
     public static final String NO_MANA_HERO = "Not enough mana to use hero's ability.";
+    public static final String NO_CARD = "No card available at that position.";
 
     private ErrorStrings() { }
 }

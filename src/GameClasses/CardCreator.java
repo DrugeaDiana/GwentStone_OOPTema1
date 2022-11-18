@@ -85,7 +85,7 @@ public class CardCreator {
         switch (name) {
             case CardNames.EMPRESS ->
                 card = new EmpressThorina(source.getMana(), source.getName(),
-                    source.getDescription(), source.getColors(), playerIdx);
+                        source.getDescription(), source.getColors(), playerIdx);
             case CardNames.GENERAL ->
                 card = new GeneralKocioraw(source.getMana(), source.getName(),
                         source.getDescription(), source.getColors(), playerIdx);
