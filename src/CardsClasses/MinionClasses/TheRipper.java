@@ -19,6 +19,7 @@ public class TheRipper extends MinionCard {
     }
 
     /**
+     * Implements the specific ability of this card
      * @param enemy target of the ability
      * @param existingTanks if there's a tank on the row with the targeted card
      * @return error code
@@ -29,7 +30,7 @@ public class TheRipper extends MinionCard {
      * 0 if the ability succeeds
      */
     public int ability(final MinionCard enemy, final boolean existingTanks) {
-        if (!isAttackedTurn()) {
+        if (isAttackedTurn()) {
             if (!isFrozen()) {
                 if (enemy.getPlayerID() != getPlayerID()) {
                     if (existingTanks) {
@@ -56,6 +57,7 @@ public class TheRipper extends MinionCard {
     }
 
     /**
+     * Lowers the attack of the targeted minion
      * @param enemy the MinionCard who gets their attack lowered
      */
     public void lowerAttack(final MinionCard enemy) {

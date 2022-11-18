@@ -1,6 +1,7 @@
 package gameclasses;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import constants.CommandStrings;
 import fileio.ActionsInput;
 
 public class ActionHandler {
@@ -16,65 +17,46 @@ public class ActionHandler {
         GameCommands gameCommands = new GameCommands();
         String command = action.getCommand();
         switch (command) {
-            case "getPlayerDeck" -> {
+            case CommandStrings.PLAYER_DECK ->
                 debugCommands.getPlayerDeck(player, output);
-            }
-            case "getPlayerHero" -> {
+            case CommandStrings.PLAYER_HERO ->
                 debugCommands.getPlayerHero(player, output);
-            }
-            case "getPlayerTurn" -> {
+            case CommandStrings.PLAYER_TURN ->
                 debugCommands.getPlayerTurn(game.getTurnCounter(), game.getStartingPlayer(),
                                             output);
-            }
-            case "endPlayerTurn" -> {
+            case CommandStrings.END_TURN ->
                 gameCommands.endPlayerTurn(game, player);
-            }
-            case "placeCard" -> {
+            case CommandStrings.PLACE_CARD ->
                 gameCommands.placeCard(game, player, action.getHandIdx(), output);
-            }
-            case "getPlayerMana" -> {
+            case CommandStrings.MANA ->
                 debugCommands.getPlayerMana(player, output);
-            }
-            case "getCardsInHand" -> {
+            case CommandStrings.CARDS_IN_HAND ->
                 debugCommands.getPlayerHand(player, output);
-            }
-            case "getCardsOnTable" -> {
+            case CommandStrings.CARDS_ON_TABLE ->
                 debugCommands.getCardsOnTable(game, output);
-            }
-            case "useEnvironmentCard" -> {
+            case CommandStrings.ENV_CARD ->
                 gameCommands.useEnvironmentCard(game, player, action.getHandIdx(),
                         action.getAffectedRow(), output);
-            }
-            case "getEnvironmentCardsInHand" -> {
+            case CommandStrings.ENV_CARDS_IN_HAND ->
                 debugCommands.getEnvironmentCardsInHand(player, output);
-            }
-            case "getCardAtPosition" -> {
+            case CommandStrings.CARD_AT_POSITION ->
                 debugCommands.getCardAtPosition(game, output, action);
-            }
-            case "getFrozenCardsOnTable" -> {
+            case CommandStrings.FROZEN_CARDS ->
                 debugCommands.getFrozenCardsOnTable(game, output);
-            }
-            case "cardUsesAttack" -> {
+            case CommandStrings.ATTACK ->
                 gameCommands.cardAttack(game, action, output);
-            }
-            case "cardUsesAbility" -> {
+            case CommandStrings.ABILITY ->
                 gameCommands.cardUsesAbility(game, action, output);
-            }
-            case "useAttackHero" -> {
+            case CommandStrings.ATTACK_A_HERO ->
                 gameCommands.useAttackHero(game, action, player, output);
-            }
-            case "useHeroAbility" -> {
+            case CommandStrings.HERO_ABILITY ->
                 gameCommands.useHeroAbility(game, player, action.getAffectedRow(), output);
-            }
-            case "getPlayerOneWins" -> {
+            case CommandStrings.WINS_1 ->
                 debugCommands.getPlayerOneWins(game, output);
-            }
-            case "getPlayerTwoWins" -> {
+            case CommandStrings.WINS_2 ->
                 debugCommands.getPlayerTwoWins(game, output);
-            }
-            case "getTotalGamesPlayed" -> {
+            case CommandStrings.ALL_GAMES ->
                 debugCommands.getTotalGamesPlayed(game, output);
-            }
             default -> { }
         }
     }

@@ -14,11 +14,14 @@ public class KingMudface extends HeroCard {
 
     /**
      * @param targetRow targeted row
-     * The function implements the ability of each hero
+     * @return error codes:
+     * -2: the targeted row is an enemy row
+     * -3 : the HeroCard has used its ability this turn already
+     * 0 : the ability was cast with success
      */
     @Override
     public int ability(final int targetRow, final Game game) {
-        if (!isAttackTurn()) {
+        if (isAttackTurn()) {
             if (getPlayerID() == 1) {
                 if (targetRow < Constants.MAX_ROW_PLAYER_1
                         && targetRow > Constants.MIN_ROW_PLAYER_1) {
@@ -42,6 +45,7 @@ public class KingMudface extends HeroCard {
     }
 
     /**
+     * Raises the health value of every minion from the targeted row
      * @param row list of MinionCards from the targeted row
      */
     public void raiseHealth(final ArrayList<MinionCard> row) {

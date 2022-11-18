@@ -38,6 +38,7 @@ public class Firestorm extends EnvironmentCard {
     }
 
     /**
+     * Deals damage to each card on the targeted row and then eliminates them if they died
      * @param game the base game variable
      * @param targetRow the row we're targeting
      */

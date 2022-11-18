@@ -27,7 +27,7 @@ public abstract class HeroCard extends Card {
      * @return if the hero has used their ability this turn
      */
     public boolean isAttackTurn() {
-        return attackTurn;
+        return !attackTurn;
     }
 
     /**
@@ -52,8 +52,9 @@ public abstract class HeroCard extends Card {
     }
 
     /**
-     * @param targetRow targeted row
      * The function implements the ability of each hero
+     * @param targetRow targeted row
+     * @return error codes depending on the ability
      */
     public abstract int ability(int targetRow, Game game);
 }

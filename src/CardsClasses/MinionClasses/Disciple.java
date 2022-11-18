@@ -19,6 +19,7 @@ public class Disciple extends MinionCard {
     }
 
     /**
+     * Raises the health of the targeted card
      * @param target targeted enemy card
      * @return error code
      * -1 for trying to use the ability on an enemy card
@@ -27,7 +28,7 @@ public class Disciple extends MinionCard {
      * 0 if the ability succeeds
      */
     public int ability(final MinionCard target, final boolean existingTanks) {
-        if (!isAttackedTurn()) {
+        if (isAttackedTurn()) {
             if (!isFrozen()) {
                 if (target.getPlayerID() == getPlayerID()) {
                     target.setHealth(target.getHealth() + 2);

@@ -1,6 +1,5 @@
 package gameclasses;
 
-
 import cardsclasses.Card;
 import cardsclasses.envclasses.Firestorm;
 import cardsclasses.envclasses.HeartHound;
@@ -18,6 +17,7 @@ import cardsclasses.minionclasses.TheRipper;
 import cardsclasses.minionclasses.TheCursedOne;
 import cardsclasses.minionclasses.Miraj;
 import cardsclasses.minionclasses.Disciple;
+import constants.CardNames;
 import fileio.CardInput;
 
 
@@ -31,57 +31,45 @@ public class CardCreator {
         String name = source.getName();
         Card card;
         switch (name) {
-            case "Berserker" -> {
+            case CardNames.BERSK ->
                 card = new Berserker(source.getMana(), source.getAttackDamage(),
                         source.getHealth(), source.getDescription(), source.getColors(),
                         source.getName(), playerID);
-            }
-            case "Goliath" -> {
+            case CardNames.GOLIATH ->
                 card = new Goliath(source.getMana(), source.getAttackDamage(), source.getHealth(),
                         source.getDescription(), source.getColors(), source.getName(), playerID);
-            }
-            case "Sentinel" -> {
+            case CardNames.SENTI ->
                 card = new Sentinel(source.getMana(), source.getAttackDamage(), source.getHealth(),
                         source.getDescription(), source.getColors(), source.getName(), playerID);
-            }
-            case "Warden" -> {
+            case CardNames.WARDEN ->
                 card = new Warden(source.getMana(), source.getAttackDamage(), source.getHealth(),
                         source.getDescription(), source.getColors(), source.getName(), playerID);
-            }
-            case "The Ripper" -> {
+            case CardNames.RIPP ->
                 card = new TheRipper(source.getMana(), source.getAttackDamage(),
                         source.getHealth(), source.getDescription(), source.getColors(),
                         source.getName(), playerID);
-            }
-            case "Miraj" -> {
+            case CardNames.MIRAJ ->
                 card = new Miraj(source.getMana(), source.getAttackDamage(), source.getHealth(),
                         source.getDescription(), source.getColors(), source.getName(), playerID);
-            }
-            case "The Cursed One" -> {
+            case CardNames.CURSED ->
                 card = new TheCursedOne(source.getMana(), source.getAttackDamage(),
                         source.getHealth(), source.getDescription(), source.getColors(),
                         source.getName(), playerID);
-            }
-            case "Disciple" -> {
+            case CardNames.DISCIPLE ->
                 card = new Disciple(source.getMana(), source.getAttackDamage(),
                         source.getHealth(), source.getDescription(), source.getColors(),
                         source.getName(), playerID);
-            }
-            case "Firestorm" -> {
+            case CardNames.FIRE ->
                 card = new Firestorm(source.getMana(), source.getName(),
                         source.getDescription(), source.getColors(), playerID);
-            }
-            case "Winterfell" -> {
+            case CardNames.WINTER ->
                 card = new Winterfell(source.getMana(), source.getName(),
                         source.getDescription(), source.getColors(), playerID);
-            }
-            case "Heart Hound" -> {
+            case CardNames.HEART ->
                 card = new HeartHound(source.getMana(), source.getName(), source.getDescription(),
                         source.getColors(), playerID);
-            }
-            default -> {
+            default ->
                 card = null;
-            }
         }
         return card;
     }
@@ -95,25 +83,20 @@ public class CardCreator {
         String name = source.getName();
         HeroCard card;
         switch (name) {
-            case "Empress Thorina" -> {
+            case CardNames.EMPRESS ->
                 card = new EmpressThorina(source.getMana(), source.getName(),
-                        source.getDescription(), source.getColors(), playerIdx);
-            }
-            case "General Kocioraw" -> {
+                    source.getDescription(), source.getColors(), playerIdx);
+            case CardNames.GENERAL ->
                 card = new GeneralKocioraw(source.getMana(), source.getName(),
                         source.getDescription(), source.getColors(), playerIdx);
-            }
-            case "King Mudface" -> {
+            case CardNames.KING ->
                 card = new KingMudface(source.getMana(), source.getName(),
                         source.getDescription(), source.getColors(), playerIdx);
-            }
-            case "Lord Royce" -> {
+            case CardNames.LORD ->
                 card = new LordRoyce(source.getMana(), source.getName(),
                         source.getDescription(), source.getColors(), playerIdx);
-            }
-            default -> {
+            default ->
                 card = null;
-            }
         }
         return card;
     }

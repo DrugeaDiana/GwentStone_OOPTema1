@@ -1,104 +1,146 @@
 package gameclasses;
-import cardsclasses.*;
+import cardsclasses.Card;
+import cardsclasses.Deck;
 import cardsclasses.heroclasses.HeroCard;
 
 import java.util.ArrayList;
 
 public class Player {
+    private boolean finishTurn;
+    private int mana;
+    private int wins;
+    private final int playerId;
+    private ArrayList<Deck> decks;
+    private Deck currentDeck;
+    private ArrayList<Card> hand = new ArrayList<>();
+    private HeroCard hero;
+
+    public Player(final int playerId, final ArrayList<Deck> decks) {
+        this.playerId = playerId;
+        this.decks = decks;
+    }
+
+    public Player(final int playerId) {
+        this.playerId = playerId;
+        this.mana = 1;
+    }
+
+    /**
+     * Getter for finishTurn
+     * @return if the player has finished their turn or not
+     */
     public boolean isFinishTurn() {
         return finishTurn;
     }
 
-    public void setFinishTurn(boolean finishTurn) {
+    /**
+     * Setter for finishTurn
+     * @param finishTurn modifies if the player has finished their turn
+     */
+    public void setFinishTurn(final boolean finishTurn) {
         this.finishTurn = finishTurn;
     }
 
-    boolean finishTurn;
+    /**
+     * Getter for playerID
+     * @return the ID of the player
+     */
     public int getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
-
-    private int playerId;
-
+    /**
+     * Getter for decks
+     * @return the list of Decks the player has
+     */
     public ArrayList<Deck> getDecks() {
         return decks;
     }
 
-    public void setDecks(ArrayList<Deck> decks) {
+    /**
+     * Setter for decks
+     * @param decks the new list with the new decks
+     */
+    public void setDecks(final ArrayList<Deck> decks) {
         this.decks = decks;
     }
 
-    private ArrayList<Deck> decks;
-
+    /**
+     * Getter for currentDeck
+     * @return the currentDeck that the player is using
+     */
     public Deck getCurrentDeck() {
         return currentDeck;
     }
 
-    public void setCurrentDeck(Deck currentDeck) {
+    /**
+     * Setter for currentDeck
+     * @param currentDeck the new deck that the player is using
+     */
+    public void setCurrentDeck(final Deck currentDeck) {
         this.currentDeck = currentDeck;
     }
 
-    private Deck currentDeck;
-
-    public Deck getShuffledDeck() {
-        return shuffledDeck;
-    }
-
-    public void setShuffledDeck(Deck shuffledDeck) {
-        this.shuffledDeck = new Deck(shuffledDeck);
-    }
-
-    private Deck shuffledDeck;
-
+    /**
+     * Getter for hand
+     * @return the list of Cards that the player has in their hand
+     */
     public ArrayList<Card> getHand() {
         return hand;
     }
 
-    public void setHand(ArrayList<Card> hand) {
+    /**
+     * Setter for hand
+     * @param hand the new list of Cards that the player has in their hand
+     */
+    public void setHand(final ArrayList<Card> hand) {
         this.hand = hand;
     }
 
-    private ArrayList<Card> hand = new ArrayList<>();
-
+    /**
+     * Getter for hero
+     * @return the HeroCard that the player has
+     */
     public HeroCard getHero() {
         return hero;
     }
 
-    public void setHero(HeroCard hero) {
+    /**
+     * Setter for hero
+     * @param hero the new HeroCard that the player is using for the new game
+     */
+    public void setHero(final HeroCard hero) {
         this.hero = hero;
     }
 
-    private HeroCard hero;
-
+    /**
+     * Getter for mana
+     * @return the amount of mana the player has
+     */
     public int getMana() {
         return mana;
     }
 
-    public void setMana(int mana) {
+    /**
+     * Setter for mana
+     * @param mana the new amount of mana the player has after a new turn/using cards
+     */
+    public void setMana(final int mana) {
         this.mana = mana;
     }
 
-    private int mana;
-    private int wins;
-
-    public Player(int playerId, ArrayList<Deck> decks) {
-        this.playerId = playerId;
-        this.decks = decks;
-    }
-
-    public Player(int playerId){
-        this.playerId = playerId;
-        this.mana = 1;
-    };
-
+    /**
+     * Getter for wins
+     * @return the amount of games the player has won
+     */
     public int getWins() {
         return wins;
     }
 
+    /**
+     * Setter for wins
+     * @param wins the new amount of games the player has won
+     */
     public void setWins(final int wins) {
         this.wins = wins;
     }

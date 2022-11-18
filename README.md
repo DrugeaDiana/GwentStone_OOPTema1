@@ -1,44 +1,74 @@
 
-
 # Tema POO  - GwentStone
+* Drugea Diana Ioana - 323CA
 
-<div align="center"><img src="https://tenor.com/view/witcher3-gif-9340436.gif" width="500px"></div>
+<div align="center"><img src="https://tenor.com/view/guldan-concede-hearthstone-you-win-this-time-gif-26998120" width="500px"></div>
 
 #### Assignment Link: [https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/tema](https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/tema)
 
-
-## Skel Structure
+## File Structure
 
 * src/
+  * cardsclasses/ - contains all the classes that are related to cards
+    * envclasses/ - contains all the classes that are related to Environment cards
+      * EnvironmentCard -> the base class used for all the Environment cards
+    * heroclasses/ - contains all the classes that are related to Hero cards
+      * HeroCard -> the base class used for all the Hero cards
+    * minionclasses/ - contains all the classes that are related to Minion cards
+      * MinionCard -> the base class used for all the Minion cards
+    * Card -> the abstract class used for the cards
+    * Deck -> the class used for the deck of cards  
+  * constants - contains the class that's related to the constants used in
+                the code 
   * checker/ - checker files
   * fileio/ - contains classes used to read data from the json files
+  * gameclasses/ - contains all the classes that deal with the logic of the game
+    * ActionHandler - the class that deals with parsing the action and calling
+                      the specific commands
+    * CardCreator - the class that creates every card in the game depending on
+                    what's needed
+    * Debug - contains the implementation of all the commands that the AI uses
+              to show information about the game at specific moments
+    * Game - the class for the game itself which implements the logic of one
+              game
+    * GameCommands - contains the implementation of all the commands that
+                    directly affect the game
+    * Player -> the class that saves the data about each player
+    * PlayerPreparer -> the class that deals with creating the decks and
+                        initializing the players for each game
   * main/
-      * Main - the Main class runs the checker on your implementation. Add the entry point to your implementation in it. Run Main to test your implementation from the IDE or from command line.
-      * Test - run the main method from Test class with the name of the input file from the command line and the result will be written
-        to the out.txt file. Thus, you can compare this result with ref.
 * input/ - contains the tests in JSON format
 * ref/ - contains all reference output for the tests in JSON format
 
-## Tests
+## The program logic
 
-1. test01_game_start - 3p
-2. test02_place_card - 4p
-3. test03_place_card_invalid - 4p
-4. test04_use_env_card - 4p
-5. test05_use_env_card_invalid - 4p
-6. test06_attack_card - 4p
-7. test07_attack_card_invalid - 4p
-8. test08_use_card_ability - 4p
-9. test09_use_card_ability_invalid -4p
-10. test10_attack_hero - 4p
-11. test11_attack_hero_invalid - 4p
-12. test12_use_hero_ability_1 - 4p
-13. test13_use_hero_ability_2 - 4p
-14. test14_use_hero_ability_invalid_1 - 4p
-15. test15_use_hero_ability_invalid_2 - 4p
-16. test16_multiple_games_valid - 5p
-17. test17_multiple_games_invalid - 6p
-18. test18_big_game - 10p
+Once the game starts, the program goes through the input. It checks how many
+games we have to play and starts the main loop (present in Main). Once it
+initializes the players (at the first game) and makes sure that the
+corresponding decks are created, the Game class starts going through the list
+of actions, calling the ActionHandler for each of them. This class basically
+looks at the action names and calls either Debug or GameCommands, depending
+on what type of command is. Later, the two classes deal with each command,
+executing the specific input they've got and then put the specific output
+for each command.
+For example: The ActionHandler detects that the AI wants to see what cards
+the player has in their hand. It will call the Debug class and the
+"getCardsInHand" command, specificing the player they want to look at.
+The function in Debug will put the information in the ObjectNode and then
+attach it to the ArrayNode for out output, to later be put in the json file
+once the game has ended.
 
+## Flow scheme
 
-<div align="center"><img src="https://tenor.com/view/homework-time-gif-24854817.gif" width="500px"></div>
+Main -> Game -> Game-> PlayerPreparer -> CardCreator -> Card (and every child of it)
+                    -> ActionHandler -> Debug -> Card (and every child of it)
+                                     -> GameCommands -> Card (and every child of it)
+                    -> Player (sent as parameter for most of the commands)
+
+"->" = x calls y class
+
+## Problems encountered
+
+Trying to understand how writing in the Json file works while using the
+correct annotations to make the output look as close as possible to the ref ._.
+

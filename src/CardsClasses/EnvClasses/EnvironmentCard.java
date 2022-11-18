@@ -14,6 +14,7 @@ public abstract class EnvironmentCard extends Card {
     }
 
     /**
+     * Implements the ability of each card
      * @param targetRow index of the row from the table we want to use the card's ability on
      * @param game variable for the game we're playing
      * @return an int code to know what error we have

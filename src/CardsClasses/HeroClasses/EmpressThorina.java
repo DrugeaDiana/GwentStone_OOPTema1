@@ -13,11 +13,16 @@ public class EmpressThorina extends HeroCard {
     }
 
     /**
+     * Implements the specific ability of this card
      * @param targetRow the row the player wants to use the ability on
+     * @return error codes:
+     * -1 : the targeted row is a friendly row
+     * -3 : the HeroCard has used its ability this turn already
+     * 0 : the ability was cast with success
      */
     @Override
     public int ability(final int targetRow, final Game game) {
-        if (!isAttackTurn()) {
+        if (isAttackTurn()) {
             if (getPlayerID() == 1) {
                 if (targetRow < Constants.MAX_ROW_NR_PLAYER_2
                         && targetRow > Constants.MIN_ROW_NR_PLAYER_2) {
@@ -42,6 +47,7 @@ public class EmpressThorina extends HeroCard {
     }
 
     /**
+     * Kills the minion with the highest health value from the targeted row
      * @param row the cards from the target row of the table
      */
     public void removeMinionWithHighestHP(final ArrayList<MinionCard> row) {

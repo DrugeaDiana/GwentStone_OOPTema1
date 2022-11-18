@@ -13,6 +13,7 @@ public class HeartHound extends EnvironmentCard {
     }
 
     /**
+     * Steals the card with the highest hp from the targeted row
      * @param targetRow index of the row from the table we want to use the card's ability on
      * @param game variable for the game we're playing
      * this function implements the "steal minion" functionality of this card's ability
@@ -29,6 +30,7 @@ public class HeartHound extends EnvironmentCard {
                 index = i;
             }
         }
+
         MinionCard stolen = rowMinions.get(index);
         if (game.getTable().get(stolen.getMirroredRow()).size() > Constants.MAX_NR_OF_CARDS) {
             return Constants.ERROR_MINUS_2;
@@ -49,6 +51,7 @@ public class HeartHound extends EnvironmentCard {
     }
 
     /**
+     * Implements the ability of the card
      * @param targetRow index of the row from the table we want to use the card's ability on
      * @param game      variable for the game we're playing
      * implements the specific ability of this card

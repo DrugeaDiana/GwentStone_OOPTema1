@@ -19,6 +19,7 @@ public class TheCursedOne extends MinionCard {
     }
 
     /**
+     * Implements the specific ability of this card
      * @param enemy target of the ability
      * @param existingTanks if there's a tank on the row with the targeted card
      * @return error code
@@ -29,8 +30,10 @@ public class TheCursedOne extends MinionCard {
      * 0 if the ability succeeds
      */
     public int ability(final MinionCard enemy, final boolean existingTanks) {
-        if (!isAttackedTurn()) {
-            if (!isFrozen()) {
+        if (isAttackedTurn()) {
+            if (isFrozen()) {
+                return Constants.ERROR_MINUS_2;
+            } else {
                 if (enemy.getPlayerID() != getPlayerID()) {
                     if (existingTanks) {
                         if (enemy.isTank()) {
@@ -46,8 +49,6 @@ public class TheCursedOne extends MinionCard {
                 } else {
                     return Constants.ERROR_MINUS_1;
                 }
-            } else {
-                return Constants.ERROR_MINUS_2;
             }
             return 0;
         } else {
@@ -56,6 +57,7 @@ public class TheCursedOne extends MinionCard {
     }
 
     /**
+     * Swaps the health and the attack of the targeted minion
      * @param enemy the minionCard who gets their health and attack values swapped
      */
     public void swapHP(final MinionCard enemy) {

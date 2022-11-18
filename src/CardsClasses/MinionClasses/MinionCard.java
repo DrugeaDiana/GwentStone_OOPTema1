@@ -55,7 +55,7 @@ public class MinionCard extends Card {
      * @return if the card attacked/used ability this turn or not
      */
     public boolean isAttackedTurn() {
-        return attackedTurn;
+        return !attackedTurn;
     }
 
     /**
@@ -90,6 +90,9 @@ public class MinionCard extends Card {
         this.frozen = copy.frozen;
         this.row = copy.row;
         this.tank = copy.tank;
+        this.mirroredRow = copy.mirroredRow;
+        this.frozenTurn = copy.frozenTurn;
+        this.attackedTurn = copy.attackedTurn;
     }
 
     /**

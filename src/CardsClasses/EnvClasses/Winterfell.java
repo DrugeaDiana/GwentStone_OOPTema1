@@ -13,12 +13,13 @@ public class Winterfell extends EnvironmentCard {
     }
 
     /**
+     * Implements the specific ability of the card
      * @param targetRow index of the row from the table we want to use the card's ability on
      * @param game      variable for the game we're playing
      * @return error code (here -1)
      */
     @Override
-    public int  ability(final int targetRow, final Game game) {
+    public int ability(final int targetRow, final Game game) {
         if (getPlayerID() == 1) {
             if (targetRow < Constants.MAX_ROW_NR_PLAYER_2
                     && targetRow >= Constants.MIN_ROW_NR_PLAYER_2) {
@@ -37,6 +38,7 @@ public class Winterfell extends EnvironmentCard {
     }
 
     /**
+     * Freezes all the minions from the targeted row
      * @param game the base game variable
      * @param targetRow the row we're targeting
      */

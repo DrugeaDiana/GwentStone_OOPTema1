@@ -12,12 +12,16 @@ public class GeneralKocioraw extends HeroCard {
     }
 
     /**
+     * Implements the specific ability of this hero
      * @param targetRow targeted row
-     * The function implements the ability of each hero
+     * @return error codes:
+     * -2 : the targeted row is an enemy row
+     * -3 : the HeroCard has used its ability this turn already
+     * 0 : the ability was cast with success
      */
     @Override
     public int ability(final int targetRow, final Game game) {
-        if (!isAttackTurn()) {
+        if (isAttackTurn()) {
             if (getPlayerID() == 1) {
                 if (targetRow < Constants.MAX_ROW_PLAYER_1
                         && targetRow > Constants.MIN_ROW_PLAYER_1) {
@@ -41,6 +45,7 @@ public class GeneralKocioraw extends HeroCard {
     }
 
     /**
+     * Raises the attack of every minion from the targeted row
      * @param row lists of MinionCards from the targeted row
      */
     public void raiseAttack(final ArrayList<MinionCard> row) {
