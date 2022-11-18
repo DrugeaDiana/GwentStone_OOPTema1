@@ -2,7 +2,6 @@
 # Tema POO  - GwentStone
 * Drugea Diana Ioana - 323CA
 
-<div align="center"><img src="https://tenor.com/view/guldan-concede-hearthstone-you-win-this-time-gif-26998120" width="500px"></div>
 
 #### Assignment Link: [https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/tema](https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/tema)
 
