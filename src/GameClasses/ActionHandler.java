@@ -3,22 +3,24 @@ package gameclasses;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import fileio.ActionsInput;
 
-import java.io.IOException;
-
 public class ActionHandler {
-
-    public void checkAction (final ActionsInput action, final ArrayNode output,
-                             final Player player, final Game game) throws IOException {
-        int playerIndex = player.getPlayerId();
+    /**
+     * @param action the action taken from the input
+     * @param output the output where we write in the json file
+     * @param player the player that does the action
+     * @param game the base game variable
+     */
+    public void checkAction(final ActionsInput action, final ArrayNode output,
+                             final Player player, final Game game) {
         Debug debugCommands = new Debug();
         GameCommands gameCommands = new GameCommands();
         String command = action.getCommand();
         switch (command) {
             case "getPlayerDeck" -> {
-                debugCommands.getPlayerDeck(playerIndex, player, output);
+                debugCommands.getPlayerDeck(player, output);
             }
             case "getPlayerHero" -> {
-                debugCommands.getPlayerHero(playerIndex, player, output);
+                debugCommands.getPlayerHero(player, output);
             }
             case "getPlayerTurn" -> {
                 debugCommands.getPlayerTurn(game.getTurnCounter(), game.getStartingPlayer(),
@@ -73,7 +75,7 @@ public class ActionHandler {
             case "getTotalGamesPlayed" -> {
                 debugCommands.getTotalGamesPlayed(game, output);
             }
-            default -> {}
+            default -> { }
         }
     }
 }

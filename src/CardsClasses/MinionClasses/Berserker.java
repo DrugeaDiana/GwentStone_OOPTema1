@@ -1,5 +1,7 @@
 package cardsclasses.minionclasses;
 
+import constants.Constants;
+
 import java.util.ArrayList;
 
 public class Berserker extends MinionCard {
@@ -8,11 +10,11 @@ public class Berserker extends MinionCard {
         super(mana, ad, hp, description, colors, name, playerID);
         setTank(false);
         if (playerID == 1) {
-            setRow(3);
-            setMirroredRow(0);
+            setRow(Constants.BACK_ROW_PLAYER_1);
+            setMirroredRow(Constants.BACK_ROW_PLAYER_2);
         } else {
-            setRow(0);
-            setMirroredRow(3);
+            setRow(Constants.BACK_ROW_PLAYER_2);
+            setMirroredRow(Constants.BACK_ROW_PLAYER_1);
         }
     }
 }

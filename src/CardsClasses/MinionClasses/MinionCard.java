@@ -4,6 +4,8 @@ import cardsclasses.Card;
 import cardsclasses.heroclasses.HeroCard;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import constants.Constants;
+
 import java.util.ArrayList;
 
 @JsonPropertyOrder({"mana", "attackDamage", "health", "description", "colors", "name"})
@@ -11,6 +13,13 @@ import java.util.ArrayList;
                         "mirroredRow", "attackedTurn", "frozenTurn"})
 public class MinionCard extends Card {
     private int health;
+    private int mirroredRow;
+    private int attackDamage;
+    private boolean tank;
+    private boolean frozen;
+    private int frozenTurn;
+    private int row;
+
 
     /**
      * @return the row where the card can be placed if it's stolen
@@ -26,11 +35,6 @@ public class MinionCard extends Card {
         this.mirroredRow = mirroredRow;
     }
 
-    private int mirroredRow;
-    private int attackDamage;
-    private boolean tank;
-    private boolean frozen;
-
     /**
      * @return the turn when the card was frozen
      */
@@ -45,8 +49,7 @@ public class MinionCard extends Card {
         this.frozenTurn = frozenTurn;
     }
 
-    private int frozenTurn;
-    private int row;
+
 
     /**
      * @return if the card attacked/used ability this turn or not
@@ -96,6 +99,7 @@ public class MinionCard extends Card {
      * -3 if you're attacking a non-tank card when there's a tank on the row
      * -1 if the target is a friendly card
      * -2 if the card that's trying to attack is frozen
+     * -4 if the card attacked this turn
      */
     public int attack(final MinionCard enemy, final boolean existingTanks) {
         if (!attackedTurn) {
@@ -106,47 +110,61 @@ public class MinionCard extends Card {
                             enemy.setHealth(enemy.getHealth() - this.getAttackDamage());
                             attackedTurn = true;
                         } else {
-                            return -3;
+                            return Constants.ERROR_MINUS_3;
                         }
                     } else {
                         enemy.setHealth(enemy.getHealth() - this.getAttackDamage());
                         attackedTurn = true;
                     }
                 } else {
-                    return -1;
+                    return Constants.ERROR_MINUS_1;
                 }
             } else {
-                return -2;
+                return Constants.ERROR_MINUS_2;
             }
             return 0;
         } else {
-            return -4;
+            return Constants.ERROR_MINUS_4;
         }
     }
 
-    public int attackHero(HeroCard enemy, boolean existingTanks) {
+    /**
+     * @param enemy the HeroCard we're wishing to attack
+     * @param existingTanks if there's any tank on the other player's rows
+     * @return error code
+     * -3 if you're attacking a non-tank card when there's a tank on the row
+     * -1 if the target is a friendly card
+     * -2 if the card that's trying to attack is frozen
+     * -4 if the card attacked this turn
+     */
+    public int attackHero(final HeroCard enemy, final boolean existingTanks) {
         if (!attackedTurn) {
             if (!isFrozen()) {
                 if (enemy.getPlayerID() != getPlayerID()) {
                     if (existingTanks) {
-                            return -3;
+                            return Constants.ERROR_MINUS_3;
                     } else {
                         enemy.setHealth(enemy.getHealth() - this.getAttackDamage());
                         attackedTurn = true;
                     }
                 } else {
-                    return -1;
+                    return Constants.ERROR_MINUS_1;
                 }
             } else {
-                return -2;
+                return Constants.ERROR_MINUS_2;
             }
             return 0;
         } else {
-            return -4;
+            return Constants.ERROR_MINUS_4;
         }
     }
 
-    public int ability(final MinionCard enemy, boolean existingTanks) {
+    /**
+     * @param enemy targeted card
+     * @param existingTanks if there's a tank on the row
+     * @return specific error code
+     */
+    public int ability(final MinionCard enemy, final boolean existingTanks) {
         return 0;
     }
 
@@ -220,15 +238,4 @@ public class MinionCard extends Card {
         this.frozen = frozen;
     }
 
-    @Override
-    public String toString() {
-        return "MinionCard{" +
-                " mana " + getMana() +
-                " name " + getName() +
-                " description " + getDescription() +
-                " colors " + getColors() +
-                " health= " + health +
-                ", attackDamage= " + attackDamage +
-                "}\n";
-    }
 }

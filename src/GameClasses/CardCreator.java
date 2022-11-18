@@ -1,8 +1,23 @@
 package gameclasses;
-import cardsclasses.*;
-import cardsclasses.envclasses.*;
-import cardsclasses.heroclasses.*;
-import cardsclasses.minionclasses.*;
+
+
+import cardsclasses.Card;
+import cardsclasses.envclasses.Firestorm;
+import cardsclasses.envclasses.HeartHound;
+import cardsclasses.envclasses.Winterfell;
+import cardsclasses.heroclasses.EmpressThorina;
+import cardsclasses.heroclasses.GeneralKocioraw;
+import cardsclasses.heroclasses.HeroCard;
+import cardsclasses.heroclasses.KingMudface;
+import cardsclasses.heroclasses.LordRoyce;
+import cardsclasses.minionclasses.Berserker;
+import cardsclasses.minionclasses.Goliath;
+import cardsclasses.minionclasses.Sentinel;
+import cardsclasses.minionclasses.Warden;
+import cardsclasses.minionclasses.TheRipper;
+import cardsclasses.minionclasses.TheCursedOne;
+import cardsclasses.minionclasses.Miraj;
+import cardsclasses.minionclasses.Disciple;
 import fileio.CardInput;
 
 
@@ -14,7 +29,7 @@ public class CardCreator {
      */
     public Card create(final CardInput source, final int playerID) {
         String name = source.getName();
-        Card card = null;
+        Card card;
         switch (name) {
             case "Berserker" -> {
                 card = new Berserker(source.getMana(), source.getAttackDamage(),
@@ -96,7 +111,9 @@ public class CardCreator {
                 card = new LordRoyce(source.getMana(), source.getName(),
                         source.getDescription(), source.getColors(), playerIdx);
             }
-            default -> card = null;
+            default -> {
+                card = null;
+            }
         }
         return card;
     }

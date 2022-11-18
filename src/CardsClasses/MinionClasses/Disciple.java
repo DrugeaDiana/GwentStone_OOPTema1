@@ -1,5 +1,7 @@
 package cardsclasses.minionclasses;
 
+import constants.Constants;
+
 import java.util.ArrayList;
 
 public class Disciple extends MinionCard {
@@ -8,11 +10,11 @@ public class Disciple extends MinionCard {
         super(mana, ad, hp, description, colors, name, playerID);
         setTank(false);
         if (playerID == 1) {
-            setRow(3);
-            setMirroredRow(0);
+            setRow(Constants.BACK_ROW_PLAYER_1);
+            setMirroredRow(Constants.BACK_ROW_PLAYER_2);
         } else {
-            setRow(0);
-            setMirroredRow(3);
+            setRow(Constants.BACK_ROW_PLAYER_2);
+            setMirroredRow(Constants.BACK_ROW_PLAYER_1);
         }
     }
 
@@ -32,13 +34,13 @@ public class Disciple extends MinionCard {
                     setAttackedTurn(true);
                     return 0;
                 } else {
-                    return -1;
+                    return Constants.ERROR_MINUS_1;
                 }
             } else {
-                return -2;
+                return Constants.ERROR_MINUS_2;
             }
         } else {
-            return -4;
+            return Constants.ERROR_MINUS_4;
         }
     }
 }

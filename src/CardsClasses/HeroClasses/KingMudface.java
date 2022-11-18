@@ -1,9 +1,9 @@
 package cardsclasses.heroclasses;
 
 import cardsclasses.minionclasses.MinionCard;
+import constants.Constants;
 import gameclasses.Game;
 
-import java.time.chrono.MinguoChronology;
 import java.util.ArrayList;
 
 public class KingMudface extends HeroCard {
@@ -20,29 +20,30 @@ public class KingMudface extends HeroCard {
     public int ability(final int targetRow, final Game game) {
         if (!isAttackTurn()) {
             if (getPlayerID() == 1) {
-                if (targetRow < 4 && targetRow > 1) {
-                    System.out.println("e randu bun");
+                if (targetRow < Constants.MAX_ROW_PLAYER_1
+                        && targetRow > Constants.MIN_ROW_PLAYER_1) {
                     raiseHealth(game.getTable().get(targetRow));
                     setAttackTurn(true);
                 } else {
-                    System.out.println("unde naiba dai");
-                    return -2;
+                    return Constants.ERROR_MINUS_2;
                 }
             } else {
-                if (targetRow < 2 && targetRow > -1) {
-                    System.out.println("e randu bun");
+                if (targetRow < Constants.MAX_ROW_NR_PLAYER_2
+                        && targetRow > Constants.MIN_ROW_NR_PLAYER_2) {
                     raiseHealth(game.getTable().get(targetRow));
                     setAttackTurn(true);
                 } else {
-                    System.out.println("unde dai boss");
-                    return -2;
+                    return Constants.ERROR_MINUS_2;
                 }
             }
             return 0;
         }
-        return -3;
+        return Constants.ERROR_MINUS_3;
     }
 
+    /**
+     * @param row list of MinionCards from the targeted row
+     */
     public void raiseHealth(final ArrayList<MinionCard> row) {
         for (MinionCard minion : row) {
             minion.setHealth(minion.getHealth() + 1);

@@ -1,5 +1,7 @@
 package cardsclasses.minionclasses;
 
+import constants.Constants;
+
 import java.util.ArrayList;
 
 public class TheRipper extends MinionCard {
@@ -32,30 +34,34 @@ public class TheRipper extends MinionCard {
                 if (enemy.getPlayerID() != getPlayerID()) {
                     if (existingTanks) {
                         if (enemy.isTank()) {
-                            enemy.setAttackDamage(enemy.getAttackDamage() - 2);
-                            if (enemy.getAttackDamage() < 0) {
-                                enemy.setAttackDamage(0);
-                            }
+                            lowerAttack(enemy);
                             setAttackedTurn(true);
                         } else {
-                            return -3;
+                            return Constants.ERROR_MINUS_3;
                         }
                     } else {
-                        enemy.setAttackDamage(enemy.getAttackDamage() - 2);
-                        if (enemy.getAttackDamage() < 0) {
-                            enemy.setAttackDamage(0);
-                        }
+                        lowerAttack(enemy);
                         setAttackedTurn(true);
                     }
                 } else {
-                    return -1;
+                    return Constants.ERROR_MINUS_1;
                 }
             } else {
-                return -2;
+                return Constants.ERROR_MINUS_2;
             }
             return 0;
         } else {
-            return -4;
+            return Constants.ERROR_MINUS_4;
+        }
+    }
+
+    /**
+     * @param enemy the MinionCard who gets their attack lowered
+     */
+    public void lowerAttack(final MinionCard enemy) {
+        enemy.setAttackDamage(enemy.getAttackDamage() - 2);
+        if (enemy.getAttackDamage() < 0) {
+            enemy.setAttackDamage(0);
         }
     }
 }

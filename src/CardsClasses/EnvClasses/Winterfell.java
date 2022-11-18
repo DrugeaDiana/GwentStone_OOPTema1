@@ -1,6 +1,7 @@
 package cardsclasses.envclasses;
 
 import cardsclasses.minionclasses.MinionCard;
+import constants.Constants;
 import gameclasses.Game;
 
 import java.util.ArrayList;
@@ -19,26 +20,31 @@ public class Winterfell extends EnvironmentCard {
     @Override
     public int  ability(final int targetRow, final Game game) {
         if (getPlayerID() == 1) {
-            if (targetRow < 2 && targetRow > -1) {
-                ArrayList<MinionCard> rowMinions = game.getTable().get(targetRow);
-                for (MinionCard minion : rowMinions) {
-                    minion.setFrozen(true);
-                    minion.setFrozenTurn(game.getTurnCounter());
-                }
+            if (targetRow < Constants.MAX_ROW_NR_PLAYER_2
+                    && targetRow >= Constants.MIN_ROW_NR_PLAYER_2) {
+                freezeMinions(game, targetRow);
             } else {
-                return -1;
+                return Constants.ERROR_MINUS_1;
             }
         } else {
-            if (targetRow < 4 && targetRow > 1) {
-                ArrayList<MinionCard> rowMinions = game.getTable().get(targetRow);
-                for (MinionCard minion : rowMinions) {
-                    minion.setFrozen(true);
-                    minion.setFrozenTurn(game.getTurnCounter());
-                }
+            if (targetRow < Constants.MAX_ROW_PLAYER_1 && targetRow > Constants.MIN_ROW_PLAYER_1) {
+                freezeMinions(game, targetRow);
             } else {
-                return -1;
+                return Constants.ERROR_MINUS_1;
             }
         }
         return 0;
+    }
+
+    /**
+     * @param game the base game variable
+     * @param targetRow the row we're targeting
+     */
+    public void freezeMinions(final Game game, final int targetRow) {
+        ArrayList<MinionCard> rowMinions = game.getTable().get(targetRow);
+        for (MinionCard minion : rowMinions) {
+            minion.setFrozen(true);
+            minion.setFrozenTurn(game.getTurnCounter());
+        }
     }
 }

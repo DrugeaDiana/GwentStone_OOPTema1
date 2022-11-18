@@ -95,14 +95,6 @@ public class Player {
         this.mana = 1;
     };
 
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "decks=" + decks +
-                '}';
-    }
-
     public int getWins() {
         return wins;
     }

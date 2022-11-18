@@ -1,5 +1,7 @@
 package cardsclasses.minionclasses;
 
+import constants.Constants;
+
 import java.util.ArrayList;
 
 public class Miraj extends MinionCard {
@@ -8,11 +10,11 @@ public class Miraj extends MinionCard {
         super(mana, ad, hp, description, colors, name, playerID);
         setTank(false);
         if (playerID == 1) {
-            setRow(2);
-            setMirroredRow(1);
+            setRow(Constants.FRONT_ROW_PLAYER_1);
+            setMirroredRow(Constants.FRONT_ROW_PLAYER_2);
         } else {
-            setRow(1);
-            setMirroredRow(2);
+            setRow(Constants.FRONT_ROW_PLAYER_2);
+            setMirroredRow(Constants.FRONT_ROW_PLAYER_1);
         }
     }
 
@@ -32,30 +34,34 @@ public class Miraj extends MinionCard {
                 if (enemy.getPlayerID() != getPlayerID()) {
                     if (existingTanks) {
                         if (enemy.isTank()) {
-                            int enHp = enemy.getHealth();
-                            int cardHp = getHealth();
-                            enemy.setHealth(cardHp);
-                            setHealth(enHp);
+                            swapHP(enemy);
                             setAttackedTurn(true);
                         } else {
-                            return -3;
+                            return Constants.ERROR_MINUS_3;
                         }
                     } else {
-                        int enHp = enemy.getHealth();
-                        int cardHp = getHealth();
-                        enemy.setHealth(cardHp);
-                        setHealth(enHp);
+                        swapHP(enemy);
                         setAttackedTurn(true);
                     }
                 } else {
-                    return -1;
+                    return Constants.ERROR_MINUS_1;
                 }
             } else {
-                return -2;
+                return Constants.ERROR_MINUS_2;
             }
             return 0;
         } else {
-            return -4;
+            return Constants.ERROR_MINUS_4;
         }
+    }
+
+    /**
+     * @param enemy the enemy to swap the health value with
+     */
+    public void swapHP(final MinionCard enemy) {
+        int enHp = enemy.getHealth();
+        int cardHp = getHealth();
+        enemy.setHealth(cardHp);
+        setHealth(enHp);
     }
 }

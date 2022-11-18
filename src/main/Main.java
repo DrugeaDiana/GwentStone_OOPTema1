@@ -72,18 +72,10 @@ public final class Main {
 
         ArrayNode output = objectMapper.createArrayNode();
 
-        //TODO add here the entry point to your implementation
-
         Game game = new Game(inputData, output);
         for (int i = 0; i < inputData.getGames().size(); i++) {
-            System.out.println("joc nou");
             game.playGame(i);
         }
-
-
-
-
-
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);

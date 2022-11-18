@@ -1,5 +1,7 @@
 package cardsclasses.minionclasses;
 
+import constants.Constants;
+
 import java.util.ArrayList;
 
 public class Goliath extends MinionCard {
@@ -8,11 +10,11 @@ public class Goliath extends MinionCard {
         super(mana, ad, hp, description, colors, name, playerID);
         setTank(true);
         if (playerID == 1) {
-            setRow(2);
-            setMirroredRow(1);
+            setRow(Constants.FRONT_ROW_PLAYER_1);
+            setMirroredRow(Constants.FRONT_ROW_PLAYER_2);
         } else {
-            setRow(1);
-            setMirroredRow(2);
+            setRow(Constants.FRONT_ROW_PLAYER_2);
+            setMirroredRow(Constants.FRONT_ROW_PLAYER_1);
         }
     }
 }

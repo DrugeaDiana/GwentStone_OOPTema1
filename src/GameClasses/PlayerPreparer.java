@@ -38,24 +38,19 @@ public class PlayerPreparer {
         int playerID = player.getPlayerId();
         int cardNumber = decksInput.getNrCardsInDeck();
 
-        System.out.println(deckIndex);
         for (int i = 0; i < cardNumber; i++) {
             deck.add(cardCreator.create(decksInput.getDecks().get(deckIndex).get(i), playerID));
         }
-        Deck currentDeck = new Deck(deck);
-        return currentDeck;
+        return new Deck(deck);
     }
 
     public void preparePlayer(Player player, StartGameInput start, DecksInput decksInput) {
         int playerIdx = player.getPlayerId();
         Random rnd = new Random(start.getShuffleSeed());
-        System.out.println(start.getShuffleSeed());
+
         if (playerIdx == 1) {
             int deck_index = start.getPlayerOneDeckIdx();
-            System.out.println(deck_index);
-            //ArrayList<Card> currentCards = new ArrayList<>(player.getDecks().get(deck_index).getCards());
             player.setCurrentDeck(prepareCurrentDeck(decksInput, player, deck_index));
-            //player.setShuffledDeck(player.getDecks().get(deck_index));
             Collections.shuffle(player.getCurrentDeck().getCards(), rnd);
             CardCreator creator = new CardCreator();
             HeroCard playerHero = creator.createHero(start.getPlayerOneHero(), playerIdx);
@@ -68,11 +63,7 @@ public class PlayerPreparer {
             player.setMana(1);
         } else {
             int deck_index = start.getPlayerTwoDeckIdx();
-            System.out.println(deck_index);
-            //ArrayList<Card> currentCards = new ArrayList<>(player.getDecks().get(deck_index).getCards());
-            //Deck currentDeck = new Deck(currentCards);
             player.setCurrentDeck(prepareCurrentDeck(decksInput, player, deck_index));
-            //player.setShuffledDeck(player.getDecks().get(deck_index));
             Collections.shuffle(player.getCurrentDeck().getCards(), rnd);
             CardCreator creator = new CardCreator();
             HeroCard playerHero = creator.createHero(start.getPlayerTwoHero(), playerIdx);
@@ -83,8 +74,6 @@ public class PlayerPreparer {
             player.getCurrentDeck().getCards().remove(0);
             player.setFinishTurn(false);
             player.setMana(1);
-            //player.getHand().add(player.getShuffledDeck().getCards().get(0));
-            //player.getCurrentDeck().getCards().remove(player.getHand().get(0));
         }
     }
 

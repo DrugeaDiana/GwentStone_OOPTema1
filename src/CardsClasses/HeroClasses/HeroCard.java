@@ -1,6 +1,7 @@
 package cardsclasses.heroclasses;
 
 import cardsclasses.Card;
+import constants.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -13,10 +14,7 @@ import java.util.ArrayList;
 @JsonIgnoreProperties({"type", "playerID", "CardType", "attackTurn"})
 public abstract class HeroCard extends Card {
 
-    private int health = 30;
-
-
-
+    private int health = Constants.MAX_HERO_HP;
     private boolean attackTurn;
 
     public HeroCard(final int mana, final String name, final String description,

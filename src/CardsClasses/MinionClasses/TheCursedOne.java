@@ -1,5 +1,7 @@
 package cardsclasses.minionclasses;
 
+import constants.Constants;
+
 import java.util.ArrayList;
 
 public class TheCursedOne extends MinionCard {
@@ -8,11 +10,11 @@ public class TheCursedOne extends MinionCard {
         super(mana, ad, hp, description, colors, name, playerID);
         setTank(false);
         if (playerID == 1) {
-            setRow(3);
-            setMirroredRow(0);
+            setRow(Constants.BACK_ROW_PLAYER_1);
+            setMirroredRow(Constants.BACK_ROW_PLAYER_2);
         } else {
-            setRow(0);
-            setMirroredRow(3);
+            setRow(Constants.BACK_ROW_PLAYER_2);
+            setMirroredRow(Constants.BACK_ROW_PLAYER_1);
         }
     }
 
@@ -32,32 +34,34 @@ public class TheCursedOne extends MinionCard {
                 if (enemy.getPlayerID() != getPlayerID()) {
                     if (existingTanks) {
                         if (enemy.isTank()) {
-                            int enHp = enemy.getHealth();
-                            int enAd = enemy.getAttackDamage();
-                            System.out.println("enemy stats: hp: " + enHp + "ad: " + enAd);
-                            enemy.setAttackDamage(enHp);
-                            enemy.setHealth(enAd);
-                            System.out.println("enemy stats after swap: hp " + enHp + "ad: " + enAd);
+                            swapHP(enemy);
                             setAttackedTurn(true);
                         } else {
-                            return -3;
+                            return Constants.ERROR_MINUS_3;
                         }
                     } else {
-                        int enHp = enemy.getHealth();
-                        int enAd = enemy.getAttackDamage();
-                        enemy.setAttackDamage(enHp);
-                        enemy.setHealth(enAd);
+                        swapHP(enemy);
                         setAttackedTurn(true);
                     }
                 } else {
-                    return -1;
+                    return Constants.ERROR_MINUS_1;
                 }
             } else {
-                return -2;
+                return Constants.ERROR_MINUS_2;
             }
             return 0;
         } else {
-            return -4;
+            return Constants.ERROR_MINUS_4;
         }
+    }
+
+    /**
+     * @param enemy the minionCard who gets their health and attack values swapped
+     */
+    public void swapHP(final MinionCard enemy) {
+        int enHp = enemy.getHealth();
+        int enAd = enemy.getAttackDamage();
+        enemy.setAttackDamage(enHp);
+        enemy.setHealth(enAd);
     }
 }

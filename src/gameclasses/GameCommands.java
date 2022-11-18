@@ -23,37 +23,28 @@ public class GameCommands {
 
     public void placeCard(Game game, Player player, int handIdx, ArrayNode output) {
         ObjectNode node = mapper.createObjectNode();
-       // System.out.println("Current hand " + player.getPlayerId() + ": " + player.getHand());
-        if(player.getHand().get(handIdx).getType().equals("Minion")) {
+        if (player.getHand().get(handIdx).getType().equals("Minion")) {
             MinionCard minion = (MinionCard) player.getHand().get(handIdx);
             int rowId = minion.getRow();
+
             if (game.getTable().get(rowId).size() < 5) {
-                if(player.getMana() >= minion.getMana()) {
+                if (player.getMana() >= minion.getMana()) {
                     game.getTable().get(rowId).add(minion);
                     player.getHand().remove(handIdx);
                     player.setMana(player.getMana() - minion.getMana());
-//                    System.out.println("placed card, se scade cu " + minion.getMana() + "mana jucatorului " + player.getPlayerId());
-//                    System.out.println("mana curenta: " + player.getMana());
                 } else {
                     node.put("command", "placeCard");
                     node.put("handIdx", handIdx);
                     node.put("error", "Not enough mana to place card on table.");
                     output.add(node);
-                    System.out.println("n-ai mana " + player.getPlayerId());
-                    System.out.println("mana ta:" + player.getMana());
-                    System.out.println("mana minionului:" + minion.getMana());
                 }
             } else {
-                System.out.println("n-ai spatiu");
                 node.put("command", "placeCard");
                 node.put("handIdx", handIdx);
                 node.put("error", "Cannot place card on table since row is full.");
                 output.add(node);
             }
         } else {
-            System.out.println(player.getCurrentDeck().getCards());
-            System.out.println(player.getHand());
-            System.out.println("n-ai minion");
             node.put("command", "placeCard");
             node.put("handIdx", handIdx);
             node.put("error", "Cannot place environment card on table.");
@@ -61,16 +52,14 @@ public class GameCommands {
         }
     }
 
-
-
     public void useEnvironmentCard(Game game, Player player, int handIdx, int targetRow, ArrayNode output) {
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "useEnvironmentCard");
         node.put("handIdx", handIdx);
         node.put("affectedRow", targetRow);
-        if(player.getHand().get(handIdx).getType().equals("Environment")) {
+        if (player.getHand().get(handIdx).getType().equals("Environment")) {
             EnvironmentCard environmentCard = (EnvironmentCard) player.getHand().get(handIdx);
-            if(player.getMana() >= environmentCard.getMana()) {
+            if (player.getMana() >= environmentCard.getMana()) {
                 int answer = environmentCard.ability(targetRow, game);
                 switch (answer) {
                     case -1 -> {
@@ -113,23 +102,19 @@ public class GameCommands {
         switch (answer) {
             case -1 -> {
                 node.put("error", "Attacked card does not belong to the enemy.");
-                System.out.println("card belongs to enemy");
                 output.add(node);
             }
             case -2 -> {
                 node.put("error", "Attacker card is frozen.");
-                System.out.println("card is frozen");
                 output.add(node);
 
             }
             case -3 -> {
                 node.put("error", "Attacked card is not of type 'Tank'.");
-                System.out.println("enemy is not tank");
                 output.add(node);
             }
             case -4 -> {
                 node.put("error", "Attacker card has already attacked this turn.");
-                System.out.println("already attacked this turn");
                 output.add(node);
             }
             case 0 -> {
@@ -185,29 +170,22 @@ public class GameCommands {
                 } else {
                     node.put("error", "Attacked card does not belong to the enemy.");
                 }
-                System.out.println("card belongs to enemy");
                 output.add(node);
             }
             case -2 -> {
                 node.put("error", "Attacker card is frozen.");
-                System.out.println("card is frozen");
                 output.add(node);
-
             }
             case -3 -> {
                 node.put("error", "Attacked card is not of type 'Tank'.");
-                System.out.println("enemy is not tank");
                 output.add(node);
             }
             case -4 -> {
                 node.put("error", "Attacker card has already attacked this turn.");
-                System.out.println("already attacked this turn");
                 output.add(node);
             }
             case 0 -> {
-                System.out.println(atacker.getName() + " card of player " + atacker.getPlayerID() + " used ability on " +
-                        enemy.getName() + " of player " + enemy.getPlayerID());
-                if(atacker.getName().equals("The Cursed One")) {
+                if (atacker.getName().equals("The Cursed One")) {
                     if (enemy.isDead()) {
                         game.getTable().get(enemyCoord.getX()).remove(enemyCoord.getY());
                     }
@@ -219,7 +197,6 @@ public class GameCommands {
 
     public void useAttackHero(final Game game, final ActionsInput action, final Player player,
                               final ArrayNode output) {
-        Coordinates enemyCoord = action.getCardAttacked();
         HeroCard enemy;
         int id;
         if (player.getPlayerId() == 1) {
@@ -241,18 +218,15 @@ public class GameCommands {
         switch (answer) {
             case -2 -> {
                 node1.put("error", "Attacker card is frozen.");
-                System.out.println("card is frozen");
                 output.add(node1);
 
             }
             case -3 -> {
                 node1.put("error", "Attacked card is not of type 'Tank'.");
-                System.out.println("enemy is not tank");
                 output.add(node1);
             }
             case -4 -> {
                 node1.put("error", "Attacker card has already attacked this turn.");
-                System.out.println("already attacked this turn");
                 output.add(node1);
             }
             case 0 -> {
@@ -276,7 +250,6 @@ public class GameCommands {
     public void useHeroAbility(Game game, Player player, int targetRow, ArrayNode output) {
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "useHeroAbility");
-       // node.put("handIdx", handIdx);
         node.put("affectedRow", targetRow);
         HeroCard playerHero = player.getHero();
         if(player.getMana() >= playerHero.getMana()) {

@@ -1,6 +1,7 @@
 package cardsclasses.heroclasses;
 
 import cardsclasses.minionclasses.MinionCard;
+import constants.Constants;
 import gameclasses.Game;
 
 import java.util.ArrayList;
@@ -19,30 +20,32 @@ public class LordRoyce extends HeroCard {
     public int ability(final int targetRow, final Game game) {
         if (!isAttackTurn()) {
             if (getPlayerID() == 1) {
-                if (targetRow < 2 && targetRow > -1) {
-                    System.out.println("e randu bun");
+                if (targetRow < Constants.MAX_ROW_NR_PLAYER_2
+                        && targetRow > Constants.MIN_ROW_NR_PLAYER_2) {
                     freezeCard(game.getTable().get(targetRow), game);
                     setAttackTurn(true);
                 } else {
-                    System.out.println("unde naiba dai");
-                    return -1;
+                    return Constants.ERROR_MINUS_1;
                 }
             } else {
-                if (targetRow < 4 && targetRow > 1) {
-                    System.out.println("e randu bun");
+                if (targetRow < Constants.MAX_ROW_PLAYER_1
+                        && targetRow > Constants.MIN_ROW_PLAYER_1) {
                     freezeCard(game.getTable().get(targetRow), game);
                     setAttackTurn(true);
                 } else {
-                    System.out.println("unde dai boss");
-                    return -1;
+                    return Constants.ERROR_MINUS_1;
                 }
             }
             return 0;
         }
-        return -3;
+        return Constants.ERROR_MINUS_3;
     }
 
-    public void freezeCard(final ArrayList<MinionCard> row, Game game) {
+    /**
+     * @param row list of MinionCards from the targeted row
+     * @param game the base game variable
+     */
+    public void freezeCard(final ArrayList<MinionCard> row, final Game game) {
         int attack = 0;
         int index = 0;
         for (MinionCard minionCard : row) {

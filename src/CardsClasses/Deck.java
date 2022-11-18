@@ -12,6 +12,9 @@ public final class Deck {
         return cards;
     }
 
+    /**
+     * @param cards ArrayList with Cards that we want to save in the deck
+     */
     public void setCards(final ArrayList<Card> cards) {
         this.cards = cards;
     }
@@ -28,10 +31,4 @@ public final class Deck {
         this.cards.addAll(copyDeck.cards);
     }
 
-    @Override
-    public String toString() {
-        return "Deck{" +
-                "cards=" + cards +
-                '}';
-    }
 }
